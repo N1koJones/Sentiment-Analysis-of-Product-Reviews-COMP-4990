@@ -1,5 +1,4 @@
-# Meeting 1
-## September 24th, 2024
+# Meeting 1 - September 24th, 2024
 ### Niko, Ryan, Tim, James, Damian, Dr. Ranga (In-Person)
 
 Sentiment analysis for product reviews. As a customer to see 1k reviews, a customer doesn’t have time to read all of these reviews. Need a tool to analyze these reviews and the sentiment in the wording. 
@@ -14,6 +13,11 @@ Tuesdays 2:30-3:30pm as the most likely time slot for the meeting. Most likely w
 Prototype it as soon as possible. Agile workflow / sprint
 Find requirements soon.
 
+# TO-DO
+- Research technologies and look into how we want to proceed with the project
+- Review former sentiment analysis capstone projects
+
 # Next meeting information
-## Tuesday October 1st, 2024 3pm EST
-### Online via MS Teams
+Tuesday, October 1st, 2024 
+3pm EST
+Online via MS Teams
