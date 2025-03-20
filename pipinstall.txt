@@ -1,0 +1,8 @@
+NEED PYTHON 3.10.0
+pip install bert
+pip install tensorflow
+pip install transformers
+pip install datasets
+pip install torch
+pip install tf-keras
+pip install 'accelerate>=0.26.0'
