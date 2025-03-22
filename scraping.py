@@ -43,7 +43,8 @@ def scrape(targetURL):
         reviewStars = []
         reviewer = []
         reviewTitle = []
-        review = []
+        review = ''
+        numOfReviews = 0
 
         for currReview in reviewStarsBox:
             reviewStars.append(re.findall("[0-5]",currReview.get_attribute("class")))
@@ -52,24 +53,26 @@ def scrape(targetURL):
             firstBreak = re.search("\n", currReview.text)
             secondBreak = re.search("\n(.)*\n", currReview.text)
             eorWithHelpfulButton = re.search("\nHelpful", currReview.text)
-            eorWithFoundHelpful = re.search("\n[0-9]+ (people|person) found this helpful", currReview.text)
+            eorWithFoundHelpful = re.search("\n[0-9]*(One)* (people|person) found this helpful", currReview.text)
             eorWithReport = re.search("\nReport", currReview.text)
             verified = re.search("Verified Purchase\n", currReview.text)
             nonEnglish = re.search("Translate review to English", currReview.text)
 
             if (nonEnglish):
-                reviewStars.pop(len(review))
+                reviewStars.pop(numOfReviews)
                 continue
 
             reviewer.append(currReview.text[:firstBreak.regs[0][0]])
             reviewTitle.append(re.sub("\n", "",currReview.text[firstBreak.regs[0][0]:secondBreak.regs[0][1]]))
 
             if ((not eorWithFoundHelpful) and (not eorWithHelpfulButton)):
-                review.append(re.sub("\n", " ", re.sub("Read more", "", currReview.text[verified.regs[0][1]:eorWithReport.regs[0][0]])))
+                review = review + (re.sub("\n", " ", re.sub("Read more", "", currReview.text[verified.regs[0][1]:eorWithReport.regs[0][0]]))) + '\n'
             elif(eorWithFoundHelpful):
-                review.append(re.sub("\n", " ",re.sub("Read more", "",currReview.text[verified.regs[0][1]:eorWithFoundHelpful.regs[0][0]])))
+                review = review + (re.sub("\n", " ",re.sub("Read more", "",currReview.text[verified.regs[0][1]:eorWithFoundHelpful.regs[0][0]]))) + '\n'
             else:
-                review.append(re.sub("\n", " ",re.sub("Read more", "",currReview.text[verified.regs[0][1]:eorWithHelpfulButton.regs[0][0]])))
+                review = review + (re.sub("\n", " ",re.sub("Read more", "",currReview.text[verified.regs[0][1]:eorWithHelpfulButton.regs[0][0]]))) + '\n'
+            
+            numOfReviews += 1
         
             
         driver.quit() 
